@@ -1,16 +1,16 @@
-#include"myutils.h"
+#include"Myutils.h"
 
- int multiplyNumbers(int n) {
-    if (n>=1)
-        return n*multiplyNumbers(n-1);
+ int multiplyNumbers(int num) {
+    if (num>=1)
+        return num*multiplyNumbers(num-1);
     else
         return 1;
 }
-int prime(int n){
+int prime(int num){
 	int i;
-	for(i=2;i<=n/2;i++)
+	for(i=2;i<=num/2;i++)
 	{
-		if(n%i!=0)
+		if(num%i!=0)
 			continue;
 		else
 			return 1;
@@ -22,7 +22,7 @@ int checkpalindrome(char *s)
      int i,c=0,n=strlen(s);
     if(i<n/2)
     {
-         if(s[i]==s[n-i-1])
+        if(s[i]==s[n-i-1])
     	c++;
     	i++;
     	checkpalindrome(s);
@@ -30,9 +30,9 @@ int checkpalindrome(char *s)
 	else
 	{
 		if(c==i)
-        return 1;
+            return 1;
         else
-        return 0;
+            return 0;
 	}
  	 
  	
@@ -40,14 +40,14 @@ int checkpalindrome(char *s)
 int sum(int N, ...)
 {
     int loop,sum;
-    va_list va; /*for argument list*/
+    va_list var; /*for argument list*/
      
-    va_start(va,N); /*init with number of arguments*/
+    va_start(var,N); /*init with number of arguments*/
      
     /*access arguments & calculating sum*/
     sum=0;
     for(loop=0;loop<N;loop++){
-        sum+=va_arg(va,int);
+        sum+=va_arg(var,int);
     }
      
     return sum;

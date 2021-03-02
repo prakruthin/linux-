@@ -1,22 +1,22 @@
-#include"bitmask.h"
-int set(int n,int set_bit)
+#include"Bitmask.h"
+int set(int num,int set_bit)
 {
-    int m=n|(1<<(set_bit-1));
+    int m=num|(1<<(set_bit-1));
     return m;
 }
-int reset(int n, int set_bit)
+int reset(int num, int set_bit)
 {
-    int m=n&(~(1<<(set_bit-1)));
+    int m=num&(~(1<<(set_bit-1)));
     return m;
 }
-int flip(int n)
+int flip(int num)
 {
-    int m=15-n;
+    int m=15-num;
     return m;
 }
-int query(int n)
+int query(int num)
 {
-    if((n&1)==1)
+    if((num&1)==1)
     {
         return 1;
     }
