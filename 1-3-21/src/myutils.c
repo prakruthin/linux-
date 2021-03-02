@@ -1,57 +1,57 @@
-int isPrime(int num) 
-{
-    int i;
-    
-    for(i=2; i<=num/2; i++)  
-    {  
-        /*  
-         * If the number is divisible by any number  
-         * other than 1 and self then it is not prime 
-         */  
-        if(num%i == 0)  
-        {
-            return 0;
-        }  
-    } 
-    
-    return 1; 
+#include"myutils.h"
+
+ int multiplyNumbers(int n) {
+    if (n>=1)
+        return n*multiplyNumbers(n-1);
+    else
+        return 1;
 }
-int isArmstrong(int num) 
+int prime(int n){
+	int i;
+	for(i=2;i<=n/2;i++)
+	{
+		if(n%i!=0)
+			continue;
+		else
+			return 1;
+	}
+	return 0;
+}
+int checkpalindrome(char *s)
 {
-    int lastDigit, sum, originalNum, digits;
-    sum = 0;
-    
-    originalNum = num;
-
-    /* Find total digits in num */
-    digits = (int) log10(num) + 1;
-
-    /*
-     * Calculate sum of power of digits
-     */
-    while(num > 0)
+     int i,c=0,n=strlen(s);
+    if(i<n/2)
     {
-        // Extract the last digit
-        lastDigit = num % 10;
-
-        // Compute sum of power of last digit
-        sum = sum + round(pow(lastDigit, digits));
-
-        // Remove the last digit
-        num = num / 10;
-    }
-    
-    return (originalNum == sum);
+         if(s[i]==s[n-i-1])
+    	c++;
+    	i++;
+    	checkpalindrome(s);
+	}
+	else
+	{
+		if(c==i)
+        return 1;
+        else
+        return 0;
+	}
+ 	 
+ 	
 }
-
-int factorial(int n)
+int sum(int N, ...)
 {
-   int c;
-   int result = 1;
- 
-   for( c = 1 ; c <= n ; c++ )
-         result = result*c;
- 
-   return ( result );
-
+    int loop,sum;
+    va_list va; /*for argument list*/
+     
+    va_start(va,N); /*init with number of arguments*/
+     
+    /*access arguments & calculating sum*/
+    sum=0;
+    for(loop=0;loop<N;loop++){
+        sum+=va_arg(va,int);
+    }
+     
+    return sum;
 }
+
+
+ 
