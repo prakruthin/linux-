@@ -7,19 +7,13 @@ int main()
     char s1[]="linux";
     char s2[]="program";
     char s3[]="Genesis";
-    int l=mystrlen(s1);
-    printf("%d\n",l);
-    printf("%d\n",mystrcmp(s1,s2));
-    mystrcpy(s1,s2);
-    printf("%s\n",s1);
-    mystrcat(s1,s3);
-    printf("%s\n",s1);
-    int b1=8;
+    
+    int b1=36;
     printf("%d\n",set(b1,3));
     printf("%d\n",reset(b1,4));
     printf("%d\n",flip(b1));
     printf("%d\n",query(b1));
-    int n=9;
+    int n=93;
     //printf("Enter a positive integer: ");
     //scanf("%d",&n);
     printf("Factorial of %d = %d", n, multiplyNumbers(9));
@@ -32,7 +26,7 @@ int main()
 	else
 		printf("\n%d IS NOT A PRIME NUMBER\n",num);
          
-    char s[1000];  
+    char s[100];  
    
     printf("Enter  the string: ");
     //gets(s); 
@@ -42,8 +36,15 @@ int main()
         printf("string is not palindrome");
     
     printf("Sum of 10, 20 = %d\n",sum(2,10,20));
-    printf("Sum of 10, 20, 30, 40 = %d\n",sum(4,10,20,30,30));
+    printf("Sum of 10, 20, 30, 40 = %d\n",sum(5,1,10,20,30,30));
     printf("Sum of 10, 20, 30, 40, 50, 60 = %d\n",sum(6,10,20,30,30,40,50));
+	int l=mystrlen(s1);
+    printf("%d\n",l);
+    printf("%d\n",mystrcmp(s1,s2));
+    mystrcpy(s1,s2);
+    printf("%s\n",s1);
+    mystrcat(s1,s3);
+    printf("%s\n",s1);
 
 
    
