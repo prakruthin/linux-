@@ -4,9 +4,9 @@
 #include<stdio.h>
 int main()
 {
-    char s1[]="linux";
-    char s2[]="program";
-    char s3[]="Genesis";
+    char s1[]="mysore";
+    char s2[]="bangalore";
+    char s3[]="chennai";
     int l=mystrlen(s1);
     printf("%d\n",l);
     printf("%d\n",mystrcmp(s1,s2));
