@@ -1,4 +1,4 @@
-#include "maxmin.h"
+#include "maxMin.h"
 
 int main()
 {
