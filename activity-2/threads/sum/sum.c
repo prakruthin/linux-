@@ -3,7 +3,7 @@
 int Array[1000] = {};
 int sum[10] = {};
 
-void *task_body(void *pv) {
+void *body(void *pv) {
   int i, ps, temp, thread_num = (__intptr_t)pv;
   for (i = 0; i <= 100; i++)
     /* Adding 100 array values */
@@ -23,7 +23,7 @@ int sum() {
 
   for (i = 0; i < n; i++) {
     /* Create a thread to add 100 array values */
-    pthread_create(&ptarr[i], NULL, task_body, (void *)(__intptr_t)i);
+    pthread_create(&ptarr[i], NULL, body, (void *)(__intptr_t)i);
   }
 
   for (i = 0; i < n; i++)
