@@ -5,8 +5,8 @@
 #include<stdlib.h>
 #include<stdio.h>
 
-#define Max_items 10 // Maximum items a producer can produce or a consumer can consumer
-#define Buffer_size 10 // Size of the buffer
+#define Max_items 3 // Maximum items a producer can produce or a consumer can consumer
+#define Buffer_size 3 // Size of the buffer
 
 sem_t start;
 sem_t stop;
@@ -25,12 +25,12 @@ void *consumer(void *con_num)
     else
     {
      int item=0;
-     for(int i = 0; i < Max_item; i++) {
-        sem_wait(&full);
+     for(int i = 0; i < Max_items; i++) {
+        sem_wait(&stop);
         item = buffer[out];
         printf("Consumer %d: Remove Item %d from %d\n",*((int *)con_num),item, out); 
         out = (out + 1) % Buffer_size;     
-        sem_post(&empty);
+        sem_post(&start);
      }
     }
 }
@@ -43,14 +43,14 @@ void *producer(void *prod_num)
     }
     else
     {
-     for(int i = 0; i < Max_item; i++) {
+     for(int i = 0; i < Max_items; i++) {
         item = rand(); // Produce a random item
-        sem_wait(&empty);
+        sem_wait(&start);
         /* put value item into the buffer */
         buffer[in] = item;
         printf("Producer %d: Insert Item %d at %d\n", *((int *)prod_num),buffer[in],in);
         in = (in + 1) % Buffer_size;     
-        sem_post(&full);
+        sem_post(&stop);
      }
     }
 }
@@ -58,27 +58,27 @@ void *producer(void *prod_num)
 int main()
 {   
 
-    pthread_t prod[10],cons[10];
-    sem_init(&empty,0,Buffer_size);
-    sem_init(&full,0,0);
+    pthread_t prod[3],cons[3];
+    sem_init(&start,0,Buffer_size);
+    sem_init(&stop,0,0);
 
-    int arr[10] = {1,2,3,4,5,6,7,8,9,10}; 
-    for(int i = 0; i < 10; i++) {
-        pthread_create(&producer[i], NULL, (void *)producer, (void *)&arr[i]);
+    int arr[3] = {1,2,3}; 
+    for(int i = 0; i < 3; i++) {
+        pthread_create(&prod[i], NULL, (void *)producer, (void *)&arr[i]);
     }
-    for(int i = 0; i < 10; i++) {
-        pthread_create(&con[i], NULL, (void *)consumer, (void *)&arr[i]);
-    }
-
-    for(int i = 0; i < 10; i++) {
-        pthread_join(producer[i], NULL);
-    }
-    for(int i = 0; i < 10; i++) {
-        pthread_join(con[i], NULL);
+    for(int i = 0; i < 3; i++) {
+        pthread_create(&cons[i], NULL, (void *)consumer, (void *)&arr[i]);
     }
 
-    sem_destroy(&empty);
-    sem_destroy(&full);
+    for(int i = 0; i < 3; i++) {
+        pthread_join(prod[i], NULL);
+    }
+    for(int i = 0; i < 3; i++) {
+        pthread_join(cons[i], NULL);
+    }
+
+    sem_destroy(&start);
+    sem_destroy(&stop);
 
     return 0;
 }
