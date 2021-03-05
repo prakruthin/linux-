@@ -52,7 +52,7 @@ int main()
     pthread_t prod[5],cons[5];
  
 
-    int arr[3] = {1,2,3,4,5,6,7,8,9,3}; 
+    int arr[3] = {1,2,3}; 
 
     for(int i = 0; i < 3; i++) {
         pthread_create(&prod[i], NULL, (void *)producer, (void *)&arr[i]);

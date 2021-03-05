@@ -56,7 +56,7 @@ int main()
     sem_init(&start,0,BufferSize);
     sem_init(&stop,0,0);
 
-    int arr[3] = {1,2,3,4,5,6,7,8,9,3}; 
+    int arr[3] = {1,2,3}; 
 
     for(int i = 0; i < 3; i++) {
         pthread_create(&prod[i], NULL, (void *)producer, (void *)&arr[i]);

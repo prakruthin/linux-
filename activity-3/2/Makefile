@@ -1,6 +1,6 @@
 SRC = *.c
 
-INC = *.h
+#INC = *.h
 
 all: $(SRC)
 	gcc $(SRC) $(INC) -o a.out
