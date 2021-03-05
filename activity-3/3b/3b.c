@@ -7,8 +7,8 @@ program to Implement producer consumer problem using circular buffer operations 
 #include <stdlib.h>
 #include <stdio.h>
 //max value and buffer size
-#define MaxItems 10 
-#define BufferSize 10 
+#define MaxItems 3 
+#define BufferSize 3 
 int in = 0;
 int out = 0;
 int buffer[BufferSize];
@@ -50,22 +50,21 @@ int main()
 {   
 
     pthread_t prod[5],cons[5];
-    sem_init(&empty,0,BufferSize);
-    sem_init(&full,0,0);
+ 
 
-    int arr[10] = {1,2,3,4,5,6,7,8,9,10}; 
+    int arr[3] = {1,2,3,4,5,6,7,8,9,3}; 
 
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < 3; i++) {
         pthread_create(&prod[i], NULL, (void *)producer, (void *)&arr[i]);
     }
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < 3; i++) {
         pthread_create(&cons[i], NULL, (void *)consumer, (void *)&arr[i]);
     }
 
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < 3; i++) {
         pthread_join(prod[i], NULL);
     }
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < 3; i++) {
         pthread_join(cons[i], NULL);
     }
 

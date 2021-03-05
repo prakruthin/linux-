@@ -5,8 +5,8 @@
 #include<stdlib.h>
 #include<stdio.h>
 
-#define Max_items 10 // Maximum items a producer can produce or a consumer can consumer
-#define Buffer_size 10 // Size of the buffer
+#define Max_items 3 // Maximum items a producer can produce or a consumer can consumer
+#define Buffer_size 3 // Size of the buffer
 
 int in = 0;
 int out = 0;
@@ -24,7 +24,7 @@ void *consumer(void *con_num)
     else
     {
      int item=0;
-     for(int i = 0; i < Max_item; i++) {
+     for(int i = 0; i < Max_items; i++) {
         pthread_mutex_lock(&mutex);
         item = buffer[out];
         printf("Consumer %d: Remove Item %d from %d\n",*((int *)con_num),item, out); 
@@ -38,11 +38,11 @@ void *producer(void *prod_num)
 {   
     if(in==Buffer_size-1)
     {
-        printf("stack is full- Producer can produce \n");
+        printf("stack is stop- Producer can produce \n");
     }
     else
     {
-     for(int i = 0; i < Max_item; i++) {
+     for(int i = 0; i < Max_items; i++) {
         item = rand(); // Produce a random item
         pthread_mutex_lock(&mutex);
         /* put value item into the buffer */
@@ -57,22 +57,22 @@ void *producer(void *prod_num)
 int main()
 {   
 
-    pthread_t prod[10],cons[10];
+    pthread_t prod[3],cons[3];
     pthread_mutex_init(&mutex, NULL);
 
-    int arr[10] = {1,2,3,4,5,6,7,8,9,10}; 
-    for(int i = 0; i < 10; i++) {
-        pthread_create(&producer[i], NULL, (void *)producer, (void *)&arr[i]);
+    int arr[3] = {1,2,3,4,5,6,7,8,9,3}; 
+    for(int i = 0; i < 3; i++) {
+        pthread_create(&prod[i], NULL, (void *)producer, (void *)&arr[i]);
     }
-    for(int i = 0; i < 10; i++) {
-        pthread_create(&con[i], NULL, (void *)consumer, (void *)&arr[i]);
+    for(int i = 0; i < 3; i++) {
+        pthread_create(&cons[i], NULL, (void *)consumer, (void *)&arr[i]);
     }
 
-    for(int i = 0; i < 10; i++) {
-        pthread_join(producer[i], NULL);
+    for(int i = 0; i < 3; i++) {
+        pthread_join(prod[i], NULL);
     }
-    for(int i = 0; i < 10; i++) {
-        pthread_join(con[i], NULL);
+    for(int i = 0; i < 3; i++) {
+        pthread_join(cons[i], NULL);
     }
 
     pthread_mutex_destroy(&mutex);
