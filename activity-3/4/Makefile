@@ -1,12 +1,16 @@
-SRC = *.c
+all: sender reciver
 
-INC = *.h
+sender: sender.c 
+	gcc sender.c -lrt -o sender.out
+	
+reciver: reciver.c 
+	gcc reciver.c -lrt -o reciver.out
+	
+runclient:
+	./reciver.out
 
-all: $(SRC)
-	gcc $(SRC) $(INC) -lpthread -o a.out
-
-run:
-	./a.out
+runsender:
+	./sender.out
 
 clean:
 	rm -rf *.out *.o
