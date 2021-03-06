@@ -24,7 +24,7 @@ int findMax()
   srand(time(0));
 
   for(i=0; i<1000; i++)
-  {
+  {Q1
     /* Assigning random value to Array */
     Array[i] = random()%100;
   }
